@@ -6,17 +6,20 @@ import cats._
 import cats.data._
 import cats.implicits._
 
+import org.apache.poi.ss.usermodel.{Cell, Row}
+import org.apache.poi.xssf.usermodel._
+
 // the following code is designed to derive a PoiEncoder instance for flat case classes
 object instances {
-  implicit val stringEncoder: PoiEncoder[String] = PoiEncoder.pure(1)(s => List(s))
+  implicit val stringEncoder: PoiEncoder[String] = PoiEncoder.pure(1)(s => List(StrCell(s)))
   implicit val booleanEncoder: PoiEncoder[Boolean] =
-    PoiEncoder.pure(1)(b => if (b) List("true") else List("false"))
-  implicit val intEncoder: PoiEncoder[Int] = PoiEncoder.pure(1)(i => List(i.show))
-  implicit val doubleEncoder: PoiEncoder[Double] = PoiEncoder.pure(1)(d => List(d.show))
-  implicit val longEncoder: PoiEncoder[Long] = PoiEncoder.pure(1)(l => List(l.show))
+    PoiEncoder.pure(1)(b => List(BoolCell(b)))
+  implicit val intEncoder: PoiEncoder[Int] = PoiEncoder.pure(1)(i => List(NumCell(i)))
+  implicit val doubleEncoder: PoiEncoder[Double] = PoiEncoder.pure(1)(d => List(NumCell(d)))
+  implicit val longEncoder: PoiEncoder[Long] = PoiEncoder.pure(1)(l => List(NumCell(l)))
 
   implicit def optionEncoder[A](implicit E: PoiEncoder[A]): PoiEncoder[Option[A]] =
-    PoiEncoder.pure(E.width)(o => o.map(E.encode).getOrElse(List.fill(E.width)("")))
+    PoiEncoder.pure(E.width)(o => o.map(E.encode).getOrElse(List.fill(E.width)(BlankCell)))
 
   implicit val hnilEncoder: PoiEncoder[HNil] = PoiEncoder.pure(0)(hnil => Nil)
 
@@ -37,8 +40,8 @@ object instances {
     hEncoder: Lazy[PoiEncoder[H]],
     tEncoder: PoiEncoder[T]
   ): PoiEncoder[H :+: T] = PoiEncoder.pure(hEncoder.value.width + tEncoder.width) {
-    case Inl(h) => hEncoder.value.encode(h) ++ List.fill(tEncoder.width)("")
-    case Inr(t) => List.fill(hEncoder.value.width)("") ++ tEncoder.encode(t)
+    case Inl(h) => hEncoder.value.encode(h) ++ List.fill(tEncoder.width)(BlankCell)
+    case Inr(t) => List.fill(hEncoder.value.width)(BlankCell) ++ tEncoder.encode(t)
   }
 
   implicit def genericEncoder[A, R](
