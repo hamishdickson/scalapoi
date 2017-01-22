@@ -11,7 +11,11 @@ object Examples {
   case class Bar(s2: String, f: Option[Foo], d: Double)
 
   val foo = Foo("two", false, 123)
-  val bars = List(Bar("one", Some(foo), 4.0))
+  val bars = List(
+    Bar("one", Some(foo), 4.0),
+    Bar("two", Some(foo), 4.0),
+    Bar("three", Some(foo), 4.0)
+  )
 
   val w = PoiEncoder.writePoi(bars)
 }

@@ -16,7 +16,7 @@ object PoiEncoder {
       def encode(value: A): List[PoiCell] = func(value)
     }
 
-  // this is basically a CSV writer right now
+  // todo this is basically a CSV writer right now, adapt
   def writePoi[A](values: List[A])(implicit P: PoiEncoder[A]) =
-    values.map(v => P.encode(v).mkString(",")).mkString("\n")
+    values.map(P.encode(_))
 }
