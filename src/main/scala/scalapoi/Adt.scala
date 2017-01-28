@@ -1,21 +1,21 @@
 package scalapoi
 
-object PoiFree {
-  trait Sheet
+import cats.free.Free
+import scalapoi.PoiFree._
 
-  sealed trait PoiGrammerT[T]
-  final case class Put[T](sheet: Sheet, value: T) extends PoiGrammerT[Unit]
-  final case class Get[T](sheet: Sheet) extends PoiGrammerT[Option[T]]
-  final case class Delete(sheet: Sheet) extends PoiGrammerT[Unit]
-
-  import cats.free.Free
-
+object Adt {
   type PoiGrammer[T] = Free[PoiGrammerT, T]
 
   import cats.free.Free.liftF
 
+  def createDocument(name: String): PoiGrammer[Unit] =
+    liftF[PoiGrammerT, Unit](CreateDocument(name))
+
+  def createSheet(name: String, doc: Document): PoiGrammer[Unit] =
+    liftF[PoiGrammerT, Unit](CreateSheet(name, doc))
+
   // Put returns nothing (i.e. Unit).
-  def put[T](sheet: Sheet, value: T): PoiGrammer[Unit] =
+  def put[T](value: T, sheet: Sheet): PoiGrammer[Unit] =
     liftF[PoiGrammerT, Unit](Put[T](sheet, value))
 
   // Get returns a T value.

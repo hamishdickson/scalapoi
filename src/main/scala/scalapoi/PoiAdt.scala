@@ -14,6 +14,7 @@ final case class BoolCell(b: Boolean) extends PoiCell
 final case class ErrorCell(e: Byte) extends PoiCell
 final case object BlankCell extends PoiCell
 
+// todo - this looks like a waste of space
 object Something {
   def getPoiCell(c: Cell): PoiCell = c.getCellType() match {
     case Cell.CELL_TYPE_STRING => StrCell(c.getStringCellValue())

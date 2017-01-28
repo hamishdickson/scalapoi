@@ -21,8 +21,6 @@ object instances {
   implicit def optionEncoder[A](implicit E: PoiEncoder[A]): PoiEncoder[Option[A]] =
     PoiEncoder.pure(E.width)(o => o.map(E.encode).getOrElse(List.fill(E.width)(BlankCell)))
 
-  // todo list and stream
-
   implicit val hnilEncoder: PoiEncoder[HNil] = PoiEncoder.pure(0)(hnil => Nil)
 
   implicit def hlistEncoder[H, T <: HList](

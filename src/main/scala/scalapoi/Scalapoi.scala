@@ -3,7 +3,6 @@ package scalapoi
 trait PoiEncoder[A] {
   val width: Int
   def encode(value: A): List[PoiCell]
-  //   def decode(value: T): List[String]
 }
 
 object PoiEncoder {

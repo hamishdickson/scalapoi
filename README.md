@@ -1,17 +1,15 @@
 # scalapoi
 
-# Using scalapoi
+# Current status
 
-This project is a work in progress, check back soon for details on how you can use this
+I am still working on the foundations of this project. Check back soon.
 
-## Aims and Features
+## What's a POI?
 
-[Apache POI](https://poi.apache.org/) is a java API for Microsoft Documents... and it's bit of a nightmare to use, especially if you're using scala.
+[Apache POI](https://poi.apache.org/) is a java API for Microsoft Documents... and it's a bit of a nightmare to use, even on a good day.
 
-This project is designed to ease that pain a bit.
+This project aims to ease that pain a This.
 
-The final aims of this project are to:
-- provide a purely functional, compile time safe wrapper for Apache POI
-- give the ability
+## Thanks
 
-This project is heavily influenced by the [Typelevel](typelevel.org) [Doobie](https://github.com/tpolecat/doobie) and [Circe](https://github.com/circe/circe) projects. It uses [shapeless](https://github.com/milessabin/shapeless),  [cats](https://github.com/typelevel/cats) and [Monix](https://monix.io) to do pretty much all it's interesting stuff.
+little project is heavily influenced by the [Typelevel](typelevel.org) [Doobie](https://github.com/tpolecat/doobie) and [Circe](https://github.com/circe/circe) projects. It uses [shapeless](https://github.com/milessabin/shapeless),  [cats](https://github.com/typelevel/cats) and [Monix](https://monix.io) to do pretty much all it's interesting stuff.
