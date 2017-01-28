@@ -32,7 +32,13 @@ object Examples {
   import scalapoi.PoiFree._
 
   case class Thingy(s: String, i: Int, b: Boolean)
-  val thingy = Thingy("foo", 123, false)
+  val thingys = List(
+    Thingy("foo1", 123, false),
+    Thingy("foo2", 456, true),
+    Thingy("foo3", 789, false),
+    Thingy("foo4", 112, true),
+    Thingy("foo5", 345, false)
+  )
 
   val doc = Document("doc1")
   val sheet = Sheet("sheet1", doc)
@@ -40,7 +46,7 @@ object Examples {
   val createPutAndGet = for {
     _ <- createDocument("thing")
     _ <- createSheet("sheet1", doc)
-    _ <- put[Thingy](thingy, sheet)
-    thingys <- get[Thingy](sheet)
-  } yield thingys
+    _ <- putMany[Thingy](thingys, sheet)
+    ts <- get[Thingy](sheet)
+  } yield ts
 }
