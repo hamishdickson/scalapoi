@@ -43,10 +43,10 @@ object Examples {
   val doc = Document("doc1")
   val sheet = Sheet("sheet1", doc)
 
-  val createPutAndGet = for {
-    _ <- createDocument("thing")
+  val createADocument = for {
+    _ <- createDocument("./things.xlsx")
     _ <- createSheet("sheet1", doc)
-    _ <- putMany[Thingy](thingys, sheet)
-    ts <- get[Thingy](sheet)
-  } yield ts
+  } yield ()
+
+  
 }
