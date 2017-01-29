@@ -1,13 +1,14 @@
 package scalapoi
 
 import org.apache.poi.hssf.usermodel._
+import utils._
 
 object PoiAdt {
   sealed trait PoiAdtT[T]
 
-  final case class CreateDocument(name: String) extends PoiAdtT[HSSFWorkbook]
+  final case class CreateDocument(name: String) extends PoiAdtT[Workbook]
 
-  final case class CreateSheet(name: String, wb: HSSFWorkbook) extends PoiAdtT[HSSFSheet]
+  final case class CreateSheet(name: String, wb: Workbook) extends PoiAdtT[HSSFSheet]
 
   /**
    * Put a single T

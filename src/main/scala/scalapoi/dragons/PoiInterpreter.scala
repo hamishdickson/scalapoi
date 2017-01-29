@@ -16,7 +16,7 @@ object PoiInterpreter {
       def apply[A](fa: PoiAdtT[A]): Id[A] =
         fa match {
           case CreateDocument(name) =>
-            Workbook.create(name)
+            Document.create(name)
           case CreateSheet(name, wb) =>
             Sheet.create(name, wb)
           case _ => ???
