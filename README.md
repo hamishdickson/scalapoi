@@ -12,4 +12,4 @@ This project aims to ease that pain a This.
 
 ## Thanks
 
-little project is heavily influenced by the [Typelevel](typelevel.org) [Doobie](https://github.com/tpolecat/doobie) and [Circe](https://github.com/circe/circe) projects. It uses [shapeless](https://github.com/milessabin/shapeless),  [cats](https://github.com/typelevel/cats) and [Monix](https://monix.io) to do pretty much all it's interesting stuff.
+This little project is heavily influenced by the [Typelevel](typelevel.org) [Doobie](https://github.com/tpolecat/doobie) and [Circe](https://github.com/circe/circe) projects. It uses [shapeless](https://github.com/milessabin/shapeless) and [cats](https://github.com/typelevel/cats) to do pretty much all it's interesting stuff.
