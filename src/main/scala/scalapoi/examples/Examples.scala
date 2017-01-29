@@ -29,19 +29,24 @@ object Examples {
   )
 */
 
-  import scalapoi._
+  case class Thingy(s: String, i: Int, b: Boolean)
+  val thingys = List(
+    Thingy("foo1", 123, false),
+    Thingy("foo2", 456, true),
+    Thingy("foo3", 789, false),
+    Thingy("foo4", 112, true),
+    Thingy("foo5", 345, false)
+  )
+
   import scalapoi.Adt._
 
-  case class Thingy(s: String, i: Int, b: Boolean)
-  val thingy = Thingy("foo", 123, false)
+  val createAWbAndFill = for {
+    wbk <- createDocument("things.xlsx")
+    sheet <- createSheet("sheet1", wbk)
+    //_ <- put[Int](1, sheet)
+  } yield ()
 
-  val doc = Document("doc1")
-  val sheet = Sheet("sheet1", doc)
+  import scalapoi.dragons.PoiInterpreter._
 
-  val createPutAndGet = for {
-    _ <- createDocument("thing")
-    _ <- createSheet("sheet1", doc)
-    _ <- put[Thingy](thingy, sheet)
-    thingys <- get[Thingy](sheet)
-  } yield thingys
+  lazy val thing = createAWbAndFill.foldMap(impureInterpreter)
 }

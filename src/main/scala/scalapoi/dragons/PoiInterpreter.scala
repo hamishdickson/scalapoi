@@ -1,15 +1,14 @@
 package scalapoi
-package interpreter
+package dragons
 
 import scalapoi.PoiAdt._
-import Document._
 
 import cats.arrow.FunctionK
 import cats.{Id, ~>}
 
 object PoiInterpreter {
   /*
-  * first interpreter
+  * first kind of horrible interpreter
   */
   def impureInterpreter: PoiAdtT ~> Id  =
     new (PoiAdtT ~> Id) {
@@ -17,7 +16,9 @@ object PoiInterpreter {
       def apply[A](fa: PoiAdtT[A]): Id[A] =
         fa match {
           case CreateDocument(name) =>
-            Document.create(name)
+            Workbook.create(name)
+          case CreateSheet(name, wb) =>
+            Sheet.create(name, wb)
           case _ => ???
         }
     }
