@@ -19,6 +19,8 @@ object PoiInterpreter {
             Document.create(name)
           case CreateSheet(name, wb) =>
             Sheet.create(name, wb)
+          case Put(name, sheet) =>
+            Cells.put(name, sheet)
           case _ => ???
         }
     }

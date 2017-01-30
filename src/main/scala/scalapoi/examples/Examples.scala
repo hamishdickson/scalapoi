@@ -43,7 +43,7 @@ object Examples {
   val createAWbAndFill = for {
     wbk <- createDocument("things.xlsx")
     sheet <- createSheet("sheet1", wbk)
-    //_ <- put[Int](1, sheet)
+    _ <- put[Int](1, sheet)
   } yield ()
 
   import scalapoi.dragons.PoiInterpreter._
