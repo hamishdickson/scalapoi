@@ -19,16 +19,6 @@ object Examples {
 
   val w = PoiEncoder.writePoi(bars)
 
-  /*
-  scala> w
-  res1: List[List[scalapoi.PoiCell]] =
-  List(
-    List(StrCell(one), StrCell(two), BoolCell(false), NumCell(123.0), NumCell(4.0)),
-    List(StrCell(two), StrCell(two), BoolCell(false), NumCell(123.0), NumCell(4.0)),
-    List(StrCell(three), StrCell(two), BoolCell(false), NumCell(123.0), NumCell(4.0))
-  )
-*/
-
   case class Thingy(s: String, i: Int, b: Boolean)
   val thingys = List(
     Thingy("foo1", 123, false),
